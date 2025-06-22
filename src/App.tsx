@@ -1,7 +1,8 @@
 import { useState } from "react";
+
 import "./App.css";
-import type { Route } from "./types";
 import { routes as initialRoutes } from "./data";
+import type { Route } from "./types";
 
 function ipToNumber(ip: string): number {
   return ip.split(".").reduce((acc, octet) => acc * 256 + Number(octet), 0);
@@ -12,10 +13,7 @@ function extractPureIP(ipWithMask: string): string {
 }
 
 const App = () => {
-
-  const [sortBy, setSortBy] = useState<
-    "address" | "gateway" | "interface" | null
-  >(null);
+  const [sortBy, setSortBy] = useState<"address" | "gateway" | "interface" | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [sortedRoutes, setSortedRoutes] = useState<Route[]>(initialRoutes);
 
@@ -26,7 +24,7 @@ const App = () => {
     }
 
     let sorted: Route[] = [];
-    
+
     if (key === "address" || key === "gateway") {
       sorted = [...sortedRoutes].sort((a, b) => {
         const ipA = key === "address" ? extractPureIP(a[key] + a.mask) : a[key];
@@ -53,9 +51,7 @@ const App = () => {
 
   return (
     <div className="p-4 sm:p-6 max-w-5xl mx-auto">
-      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-        Действующие маршруты IPv4
-      </h1>
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Действующие маршруты IPv4</h1>
       <div className="overflow-x-auto">
         <table className="w-full table-auto border-collapse">
           <thead>
